@@ -42,5 +42,21 @@ class MarkovState:
         self.yellow_transition_prob = self.yellow_state_count * (1 / self.get_count_sum())
         self.green_transition_prob = self.green_state_count * (1 / self.get_count_sum())
 
+    def prob_to_string(self, state):
+        if state == 'green':
+            return f"{round(self.red_transition_prob * 100, 3)}%"
+        elif state == 'pink':
+            return f"{round(self.red_transition_prob * 100, 3)}%"
+        elif state == 'yellow':
+            return f"{round(self.red_transition_prob * 100, 3)}%"
+        else:
+            return f"{round(self.red_transition_prob * 100, 3)}%"
+
+    def data_to_tabulate(self):
+        return [["Red", self.prob_to_string("red"), self.red_state_count - 1],
+                ["Pink", self.prob_to_string("pink"), self.yellow_state_count - 1],
+                ["Yellow", self.prob_to_string("yellow"), self.yellow_state_count - 1],
+                ["Green", self.prob_to_string("green"), self.green_state_count - 1]]
+
     def to_string(self):
-        return f'Final results for the {self.name} state:\n {tabulate([["Red", f"{round(self.red_transition_prob, 4) * 100}%"], ["Pink", f"{round(self.pink_transition_prob, 4) * 100}%"], ["Yellow", f"{round(self.yellow_transition_prob, 4) * 100}%"], ["Green", f"{round(self.green_transition_prob, 4) * 100}%"]], headers=["Next State", "Probability"])}'
+        return f'Final results for the {self.name.upper()} state:\n {tabulate(self.data_to_tabulate(), headers=["Next State", "Probability", "Transition Count"])}'
