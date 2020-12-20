@@ -16,11 +16,13 @@ def markov_training():
     with open('../data/data.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=';')
         line_count = 0
+        state_now = "green"
         for row in csv_reader:
             line_count += 1
-            state_obj = vpd.get_vpd_state(float(row[HUMIDITY_INDEX]), float(row[TEMPERATURE_INDEX]))
-            get_next_state(state_obj).counter_up(state_obj)
-            get_next_state(state_obj).set_probabilities()
+            next_state = vpd.get_vpd_state(float(row[HUMIDITY_INDEX]), float(row[TEMPERATURE_INDEX]))
+            get_next_state(state_now).counter_up(next_state)
+            get_next_state(state_now).set_probabilities()
+            state_now = next_state
 
         print(f'{line_count} sets of humidity and temperature were used for the markov chain training')
 
