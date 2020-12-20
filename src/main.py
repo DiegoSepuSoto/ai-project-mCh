@@ -1,8 +1,9 @@
-# USE: from utils import vpd
+from markov_train import markov_training, print_states_info
 
 
 def main():
-    print("Hola, mundo")
+    markov_training()
+    print_states_info()
 
 
 main()
