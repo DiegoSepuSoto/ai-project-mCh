@@ -11,9 +11,13 @@ PINK_STATE = markov_model.MarkovState("pink")
 YELLOW_STATE = markov_model.MarkovState("yellow")
 GREEN_STATE = markov_model.MarkovState("green")
 
+TESTING_DATA = '../data/data.csv'
+DEVICE_ONE = '../data/esp8266_14482B.csv'
+DEVICE_TWO = '../data/esp8266_DAE921.csv'
+
 
 def markov_training():
-    with open('../data/data.csv') as csv_file:
+    with open(TESTING_DATA) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=';')
         line_count = 0
         state_now = "green"
